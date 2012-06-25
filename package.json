@@ -1,0 +1,29 @@
+{
+  "author": "advatar <johan@sellstrom.me>",
+  "name": "LinkedOUT",
+  "description": "Mirror and edit my LinkedIN profile",
+  "version": "0.0.1",
+  "repository": {
+    "title": "LinkedOUT",
+    "handle": "linkedout",
+    "author": "advatar",
+    "update": "auto",
+    "github": "https://github.com/advatar/locker-linkedout",
+    "type": "app",
+    "static": "false",
+    "run": "node dashboard.js",
+    "hidden": false,
+    "url": ""
+  },
+  "engines": {
+    "node": ">=0.4.9"
+  },
+  "dependencies": {
+    "connect-form": "0.2.1"
+   },
+  "devDependencies": {},
+  "scripts": {
+    "postinstall": "make clean;make"
+  }
+  
+}
