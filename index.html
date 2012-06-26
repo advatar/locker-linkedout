@@ -18,7 +18,7 @@
     	var baseURL = '/synclets/linkedin/getCurrent/profile';
     	$.getJSON(baseURL, {}, function (profile)
     	{
-    		if (profile && profile.length > 0) dust.render('profile', profile, function (err, profileHtml)
+    		if (profile && profile.length > 0) dust.render('profile', profile[0], function (err, profileHtml)
     		{
 
     			$("#profile").append(profileHtml);
