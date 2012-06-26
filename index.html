@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" charset="utf-8" src='js/jquery.min.js'></script>
+    <script type="text/javascript" charset="utf-8" src='js/dust-core-0.3.0.min.js'></script>
+    <script type="text/javascript" charset="utf-8" src='js/moment.min.js'></script>
+    <script type='text/javascript' charset="utf-8" src='js/jquery.simplemodal.js'></script>
+    <script src='js/compiled_templates.js'></script>
+    <script src="js/generators.js"></script>
+    <script src="js/page-handlers.js"></script>
+
+    <script>
+    $(document).ready(function() {
+    	var baseURL = '/synclets/linkedin/getCurrent/profile';
+    	$.getJSON(baseURL, {}, function (profile)
+    	{
+		  if (profile && profile.length>0)
+		    dust.render('profile', profile, 
+		      function(err, profileHtml) {  
+			    $("#profile").append(profileHtml);
+			  } 
+		    );
+		});	
+	})
+	</script>
+
+  </head>
+  <body class="profile-page">
+
+    <header class="header">
+	</header>
+	
+   <div id="profile" >
+   </div>
+
+
+  </body>
+</html>
+
