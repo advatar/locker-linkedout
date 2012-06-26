@@ -19,13 +19,27 @@
     	{
 		  if (profile && profile.length>0)
 		    dust.render('profile', profile, 
-		      function(err, profileHtml) {  
+		      function(err, profileHtml) { 
+			 
 			    $("#profile").append(profileHtml);
-			  } 
-		    );
-		});	
-	})
-	</script>
+			
+			    $("privacy").click(function() {
+			      if ($(this).className.indexOf('private')>=0) {
+				    $(this).animate({opacity: 1.0}, 100);
+				    $(this).toggleClass('private public');
+			 	  } else if ($(this).className.indexOf('public')>=0){
+			        $(this).animate({opacity: 0.5}, 100);
+			        $(this).toggleClass('public private');
+		 	      } else {
+		            $(this).animate({opacity: 0.5}, 100);
+		            $(this).addClass('private');
+		          }
+			    });
+			});
+		}
+	  });	
+    })
+</script>
 
   </head>
   <body class="profile-page">
