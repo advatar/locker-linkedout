@@ -37,3 +37,4 @@ function compileTemplates(callback) {
     var compile = require('child_process').spawn(compileScript);
     compile.stderr.on('data', console.error);
     return compile.on('exit', callback);
+}

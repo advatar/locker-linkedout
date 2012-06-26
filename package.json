@@ -10,8 +10,7 @@
     "update": "auto",
     "github": "https://github.com/advatar/locker-linkedout",
     "type": "app",
-    "static": "false",
-    "run": "node dashboard.js",
+    "static": "true",
     "hidden": false,
     "url": ""
   },
