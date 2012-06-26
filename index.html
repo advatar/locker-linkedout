@@ -13,32 +13,47 @@
     <script src="js/page-handlers.js"></script>
 
     <script>
-    $(document).ready(function() {
+    $(document).ready(function ()
+    {
     	var baseURL = '/synclets/linkedin/getCurrent/profile';
     	$.getJSON(baseURL, {}, function (profile)
     	{
-		  if (profile && profile.length>0)
-		    dust.render('profile', profile, 
-		      function(err, profileHtml) { 
-			 
-			    $("#profile").append(profileHtml);
-			
-			    $("privacy").click(function() {
-			      if ($(this).className.indexOf('private')>=0) {
-				    $(this).animate({opacity: 1.0}, 100);
-				    $(this).toggleClass('private public');
-			 	  } else if ($(this).className.indexOf('public')>=0){
-			        $(this).animate({opacity: 0.5}, 100);
-			        $(this).toggleClass('public private');
-		 	      } else {
-		            $(this).animate({opacity: 0.5}, 100);
-		            $(this).addClass('private');
-		          }
-			    });
-			});
-		}
-	  });	
-    })
+    		if (profile && profile.length > 0) dust.render('profile', profile, function (err, profileHtml)
+    		{
+
+    			$("#profile").append(profileHtml);
+
+    			$("privacy").click(function ()
+    			{
+    				if ($(this).className.indexOf('private') >= 0)
+    				{
+    					$(this).animate(
+    					{
+    						opacity: 1.0
+    					}, 100);
+    					$(this).toggleClass('private public');
+    				}
+    				else if ($(this).className.indexOf('public') >= 0)
+    				{
+    					$(this).animate(
+    					{
+    						opacity: 0.5
+    					}, 100);
+    					$(this).toggleClass('public private');
+    				}
+    				else
+    				{
+    					$(this).animate(
+    					{
+    						opacity: 0.5
+    					}, 100);
+    					$(this).addClass('private');
+    				}
+    			});
+    		});
+    	});
+    });
+
 </script>
 
   </head>
