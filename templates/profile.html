@@ -1,4 +1,4 @@
-
+{?profile}
 <div id="content" class="resume hresume">
 	<div class="profile-header">
 		<div class="masthead vcard contact" id="member-25079">
@@ -61,22 +61,25 @@
 							<h3 class="false">
 								<strong class="title">
 									<a href="#"
-									title="Find users with this title" name="title">{.title}</a>
+									title="Find users with this title" name="title">{title}</a>
 								</strong>
 							</h3>
 							<h4>
 								<strong>
-									<a href="#" title="Find users who have worked at this company" name="company">{.company.name}</a>
+									<a href="#" title="Find users who have worked at this company" name="company">{company.name}</a>
 								</strong>
 							</h4>
 						</div>
 						<p class="orgstats organization-details current-position"></p>
 						<p class="period">
 							<abbr class="dtstart" title="">{.startDate.year}-{.startDate.month}</abbr>–
-							{?.endDate}{.endDate.year}-{.endDate.month}{else:}
+							{?.endDate}{.endDate.year}-{.endDate.month}{:else}
 							<abbr class="dtstamp" title="">Present</abbr>{/.endDate}
 							<span class="duration">
-								<span class="value-title" title="P6Y1M"></span>(duration)</span>
+								<span class="value-title" title="P6Y1M"></span><script>
+								moment("{.startDate.year}-{.startDate.month}-01", "YYYY-MM-DD").fromNow();
+								</script>
+								</span>
 						</p>
 						<p class=" description current-position">{.summary}</p>
 					</div>
@@ -114,18 +117,18 @@
 				<div class="position  first education vevent vcard" id="9943518">
 					<h3 class="summary fn org">
 						<a href="#" title="Find members that attended Kungliga tekniska högskolan"
-						name="''" class="school-link">{schoolName}</a>
+						name="''" class="school-link">{.schoolName}</a>
 					</h3>
 					<h4 class="details-education">
-						<span class="degree">{degree}</span>,
+						<span class="degree">{.degree}</span>,
 						<span class="major">
 							<a href=""
-							title="Find users with this keyword" name="">{fieldOfStudy}</a>
+							title="Find users with this keyword" name="">{.fieldOfStudy}</a>
 						</span>
 					</h4>
 					<p class="period">
-						<abbr class="dtstart" title="">{startDate.year}</abbr>–
-						<abbr class="dtend" title="">{endDate.year}</abbr>
+						<abbr class="dtstart" title="">{.startDate.year}</abbr>–
+						<abbr class="dtend" title="">{.endDate.year}</abbr>
 					</p>
 					<p class=" desc details-education"> </p>
 				</div>
@@ -140,10 +143,22 @@
 		</div>
 		{#profile.recommendationsReceived.values}
 		<div class="content">
-			<div class="reference-position first privacy">								
+			<div class="reference-position first privacy">
+				<!--
+				<div class="postitle">
+					<h3 class="false">
+						<span class="title">{}</span>
+					</h3>
+					<h4>
+						<strong>
+							<span class="org summary">{}</span>
+						</strong>
+					</h4>
+				</div>
+			    -->	
 				<div>
 					<div class="reference">
-						<p>“{recommendationText}”
+						<p>“{.recommendationText}”
 							<span class="date">{}</span>
 						</p>
 						<p class="distance deg_1">
@@ -153,9 +168,9 @@
 								</span>
 							</abbr>
 							<a href="#"
-							title="View {recommender.firstName}'s Profile">{recommender.firstName} {recommender.lastName}</a>,
-							<em>{}</em>
-							<br>{}</p>
+							title="View {recommender.firstName}'s Profile">{.recommender.firstName} {.recommender.lastName}</a>,
+							<!--<em>{}</em>
+							<br>{}</p>-->
 					</div>
 				</div>
 			</div>
@@ -174,7 +189,7 @@
 					<ul>
 						{#memberUrlresources.values}
 						<li class="website privacy">
-							<a href="{.url}"
+							<a href="{url}"
 							target="_blank" title="New window will open">{.name}</a>
 						</li>
 						{/memberUrlresources.values}						
@@ -190,20 +205,18 @@
 				<dt class="pubgroups" style="display:block">Groups and Associations:</dt>
 				<dd class="pubgroups" id="pubgroups" style="display:block">
 					<p class="null">
-						<a href="#"
-						title="Find users with this keyword" name="">{profile.associations}</a>
+						<a href="#" title="Find users with this keyword" name="">{profile.associations}</a>
 					</p>
-					<ul class="groups">	
-						{#groupMemberships.values}
-											
+					
+					<ul class="groups">						
 						<li class="affiliation vcard">
-							<a class="group-logo" href="#" tracking="fulpro_grplogo"> <!--><img src="#" width="60" height="30" alt="# logo"> -->
-</a>
+							<a class="group-logo" href="#" tracking="fulpro_grplogo"> 
+								<img src="#" width="60" height="30" alt="# logo">
+					        </a>
 							<div class="group-data">
-								<a href="#" tracking="fulpro_grplogo"><strong class="fn org">{.group.name}</strong></a>
+								<a href="#" tracking="fulpro_grplogo"><strong class="fn org">{}</strong></a>
 							</div>
 						</li>
-						{#/groupMemberships.values}
 						
 					</ul>
 				</dd>
@@ -211,3 +224,4 @@
 		</div>
 	</div>
 </div>
+{/profile}

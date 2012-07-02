@@ -9,24 +9,21 @@
     <script type="text/javascript" charset="utf-8" src='js/moment.min.js'></script>
     <script type='text/javascript' charset="utf-8" src='js/jquery.simplemodal.js'></script>
     <script src='js/compiled_templates.js'></script>
-    <script src="js/generators.js"></script>
-    <script src="js/page-handlers.js"></script>
 
     <script>
     $(document).ready(function ()
     {
     	var baseURL = '/synclets/linkedin/getCurrent/profile';
-    	$.getJSON(baseURL, {}, function (profile)
+    	$.getJSON(baseURL, {}, function (profiles)
     	{
-    		if (profile && profile.length > 0) dust.render('profile', profile[0], function (err, profileHtml)
+			console.log(profiles[0]);
+    		if (profiles && profiles.length > 0) dust.render('profile', {profile:profiles[0]}, function (err, html)
     		{
-                console.log(profile);
-
-    			$("#profile").append(profileHtml);
+	            $("#myprofile").append(html);
 
     			$(".privacy").click(function ()
     			{
-    				if ($(this).className.indexOf('private') >= 0)
+    				if ($(this) && $(this).className.indexOf('private') >= 0)
     				{
     					$(this).animate(
     					{
@@ -34,7 +31,7 @@
     					}, 100);
     					$(this).toggleClass('private public');
     				}
-    				else if ($(this).className.indexOf('public') >= 0)
+    				else if ($(this) &&  $(this).className.indexOf('public') >= 0)
     				{
     					$(this).animate(
     					{
@@ -42,7 +39,7 @@
     					}, 100);
     					$(this).toggleClass('public private');
     				}
-    				else
+    				else if ($(this))
     				{
     					$(this).animate(
     					{
@@ -55,6 +52,21 @@
     	});
     });
 
+	function generateProfileHtml(profiles, callback, html) {
+
+	  if(!html) html = '';
+
+	  if(!profiles || profiles.length <= 0) return callback(html);
+	  var profile = profiles.shift();
+
+	  getProfiles(profile.name, function(info) { 
+	    dust.render('profile', info, function(err, profileHtml) {
+	      html += profileHtml;
+	      generateProfileHtml(profiles, callback, html);
+	    });
+	  });
+	}
+
 </script>
 
   </head>
@@ -63,7 +75,7 @@
     <header class="header">
 	</header>
 	
-   <div id="profile" >
+   <div id="myprofile" >
    </div>
 
 
