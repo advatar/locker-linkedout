@@ -20,6 +20,7 @@
     	{
     		if (profile && profile.length > 0) dust.render('profile', profile[0], function (err, profileHtml)
     		{
+                console.log(profile);
 
     			$("#profile").append(profileHtml);
 

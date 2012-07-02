@@ -1,14 +1,15 @@
+
 <div id="content" class="resume hresume">
 	<div class="profile-header">
 		<div class="masthead vcard contact" id="member-25079">
 			<div class="image zoomable" style="display:block" id="profile-picture">
-<img src="{profile.pictureURL}" class="photo" width="100" height="100" alt="Johan Sellström">
+<img src="{profile.pictureUrl}" class="photo" width="100" height="100" alt="Johan Sellström">
 <span class="larger-profile-photo-control" style="left: 80px; top: 80px; "></span>
 			</div>
 			<h1>
 				<span id="name" class="n fn">
 					<span class="full-name">
-						<span class="given-name">{profile.firstName}</span>
+						<span class="given-name">{profile.firstName}</span>&nbsp;
 						<span class="family-name">{profile.lastName}</span>
 					</span>
 				</span>
@@ -52,7 +53,7 @@
 		</div>
 		<div class="content vcalendar">
 			<div>				
-				{#profile.positions}
+				{#profile.positions.values}
 				<div>
 					<div class="position  first experience vevent vcard summary-current privacy" style="display:block">
 						<a class="include" href="#name"></a>
@@ -60,27 +61,27 @@
 							<h3 class="false">
 								<strong class="title">
 									<a href="#"
-									title="Find users with this title" name="title">{title}</a>
+									title="Find users with this title" name="title">{.title}</a>
 								</strong>
 							</h3>
 							<h4>
 								<strong>
-									<a href="#" title="Find users who have worked at this company" name="company">{company.name}</a>
+									<a href="#" title="Find users who have worked at this company" name="company">{.company.name}</a>
 								</strong>
 							</h4>
 						</div>
 						<p class="orgstats organization-details current-position"></p>
 						<p class="period">
-							<abbr class="dtstart" title="">{startDate.year}-{startDate.month}</abbr>–
-							{?endDate}{endDate.year}-{endDate.month}{else:}
-							<abbr class="dtstamp" title="">Present</abbr>{/endDate}
+							<abbr class="dtstart" title="">{.startDate.year}-{.startDate.month}</abbr>–
+							{?.endDate}{.endDate.year}-{.endDate.month}{else:}
+							<abbr class="dtstamp" title="">Present</abbr>{/.endDate}
 							<span class="duration">
-								<span class="value-title" title="P6Y1M"></span>x</span>
+								<span class="value-title" title="P6Y1M"></span>(duration)</span>
 						</p>
-						<p class=" description current-position">{summary}</p>
+						<p class=" description current-position">{.summary}</p>
 					</div>
 				</div>
-				{/profile.positions}
+				{/profile.positions.values}
 			</div>
 		</div>
 	</div>
@@ -91,13 +92,13 @@
 		</div>
 		<div class="content">
 			<ol class="skills" id="skills-list">				
-			  {#profile.skills}				
+			  {#profile.skills.values}				
 				<li class="competency show-bean privacy">
 					<span class="miniprofile-container">
-						<a href="#" class="jellybean">{values}</a>
+						<a href="#" class="jellybean">{.skill.name}</a>
 					</span>
 				</li>
-			  {/profile.skills}				
+			  {/profile.skills.values}				
 			</ol>
 		</div>
 	</div>
@@ -139,20 +140,7 @@
 		</div>
 		{#profile.recommendationsReceived.values}
 		<div class="content">
-			<div class="reference-position first privacy">
-				
-				<div class="postitle">
-					<h3 class="false">
-						<span class="title">{}</span>
-					</h3>
-					<h4>
-						<strong>
-							<span class="org summary">{}</span>
-						</strong>
-					</h4>
-				</div>
-				
-				
+			<div class="reference-position first privacy">								
 				<div>
 					<div class="reference">
 						<p>“{recommendationText}”
@@ -186,8 +174,8 @@
 					<ul>
 						{#memberUrlresources.values}
 						<li class="website privacy">
-							<a href="{url}"
-							target="_blank" title="New window will open">{name}</a>
+							<a href="{.url}"
+							target="_blank" title="New window will open">{.name}</a>
 						</li>
 						{/memberUrlresources.values}						
 					</ul>
@@ -205,14 +193,17 @@
 						<a href="#"
 						title="Find users with this keyword" name="">{profile.associations}</a>
 					</p>
-					<ul class="groups">						
+					<ul class="groups">	
+						{#groupMemberships.values}
+											
 						<li class="affiliation vcard">
-							<a class="group-logo" href="#" tracking="fulpro_grplogo"> <img src="#" width="60" height="30" alt="# logo">
+							<a class="group-logo" href="#" tracking="fulpro_grplogo"> <!--><img src="#" width="60" height="30" alt="# logo"> -->
 </a>
 							<div class="group-data">
-								<a href="#" tracking="fulpro_grplogo"><strong class="fn org">{}</strong></a>
+								<a href="#" tracking="fulpro_grplogo"><strong class="fn org">{.group.name}</strong></a>
 							</div>
 						</li>
+						{#/groupMemberships.values}
 						
 					</ul>
 				</dd>
