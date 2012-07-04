@@ -47,15 +47,15 @@
 		</div>
 	</div>
 	
-	<div class="section subsection-reorder" id="profile-experience" style="display:block">
-		<div class="header privacy">
+	<div class="section privacy subsection-reorder" id="profile-experience" style="display:block">
+		<div class="header ">
 			<h2>Experience</h2>
 		</div>
 		<div class="content vcalendar">
 			<div>				
 				{#profile.positions.values}
-				<div>
-					<div class="position  first experience vevent vcard summary-current privacy" style="display:block">
+				<div class="privacy">
+					<div class="position  first experience vevent vcard summary-current" style="display:block">
 						<a class="include" href="#name"></a>
 						<div class="postitle">
 							<h3 class="false">
@@ -66,7 +66,7 @@
 							</h3>
 							<h4>
 								<strong>
-									<a href="#" title="Find users who have worked at this company" name="company">{company.name}</a>
+									<span class=privacy href="#" title="Find users who have worked at this company" name="company">{company.name}</span>
 								</strong>
 							</h4>
 						</div>
@@ -98,7 +98,7 @@
 			  {#profile.skills.values}				
 				<li class="competency show-bean privacy">
 					<span class="miniprofile-container">
-						<a href="#" class="jellybean">{.skill.name}</a>
+						<span class="jellybean">{.skill.name}</span>
 					</span>
 				</li>
 			  {/profile.skills.values}				
@@ -116,14 +116,12 @@
 			<div>
 				<div class="position  first education vevent vcard" id="9943518">
 					<h3 class="summary fn org">
-						<a href="#" title="Find members that attended Kungliga tekniska högskolan"
-						name="''" class="school-link">{.schoolName}</a>
+						<span class="school-link">{.schoolName}</span>
 					</h3>
 					<h4 class="details-education">
 						<span class="degree">{.degree}</span>,
 						<span class="major">
-							<a href=""
-							title="Find users with this keyword" name="">{.fieldOfStudy}</a>
+							{.fieldOfStudy}
 						</span>
 					</h4>
 					<p class="period">
@@ -137,13 +135,13 @@
 		{/profile.educations.values}				
 	</div>
 	
-	<div class="section" id="profile-recommendations privacy">
+	<div class="section privacy" id="profile-recommendations privacy">
 		<div class="header">
 			<h2 id="recommendations">Recommendations For {profile.firstName}</h2>
 		</div>
 		{#profile.recommendationsReceived.values}
-		<div class="content">
-			<div class="reference-position first privacy">
+		<div class="content privacy">
+			<div class="reference-position first">
 				<!--
 				<div class="postitle">
 					<h3 class="false">
@@ -159,7 +157,6 @@
 				<div>
 					<div class="reference">
 						<p>“{.recommendationText}”
-							<span class="date">{}</span>
 						</p>
 						<p class="distance deg_1">
 							<abbr title="Tomas is your connection">
@@ -167,8 +164,8 @@
 									<sup>st</sup>
 								</span>
 							</abbr>
-							<a href="#"
-							title="View {recommender.firstName}'s Profile">{.recommender.firstName} {.recommender.lastName}</a>,
+							<div class=privacy
+							title="View {recommender.firstName}'s Profile">{.recommender.firstName} {.recommender.lastName}</div>,
 							<!--<em>{}</em>
 							<br>{}</p>-->
 					</div>
@@ -178,7 +175,7 @@
 		{/profile.recommendationsReceived.values}
 				
 	</div>
-	<div class="section privacy" id="profile-additional" style="display:block">
+	<div class="section" id="profile-additional" style="display:block">
 		<div class="header">
 			<h2>Additional Information</h2>
 		</div>
@@ -187,36 +184,34 @@
 				<dt class="websites" style="display:block">Websites:</dt>
 				<dd class="websites" style="display:block">
 					<ul>
-						{#memberUrlresources.values}
+						{#profile.memberUrlResources.values}
 						<li class="website privacy">
-							<a href="{url}"
+							<a href="{.url}"
 							target="_blank" title="New window will open">{.name}</a>
 						</li>
-						{/memberUrlresources.values}						
+						{/profile.memberUrlResources.values}						
 					</ul>
 				</dd>
 				
 				<dt class="interests privacy" style="display:block">Interests:</dt>
 				<dd class="interests" id="interests" style="display:block">
 					<p class="">
-						<a href="#" title="Find users with this keyword" name="">{profile.interests}</a>
+						{profile.interests}
 					</p>
 				</dd>
 				<dt class="pubgroups" style="display:block">Groups and Associations:</dt>
 				<dd class="pubgroups" id="pubgroups" style="display:block">
-					<p class="null">
-						<a href="#" title="Find users with this keyword" name="">{profile.associations}</a>
+					<p class="privacy">
+						{profile.associations}
 					</p>
-					
-					<ul class="groups">						
-						<li class="affiliation vcard">
-							<a class="group-logo" href="#" tracking="fulpro_grplogo"> 
-								<img src="#" width="60" height="30" alt="# logo">
-					        </a>
+					<ul class="groups">	
+						{#profile.groupMemberships.values}
+						<li class="affiliation vcard privacy">
 							<div class="group-data">
-								<a href="#" tracking="fulpro_grplogo"><strong class="fn org">{}</strong></a>
+								<strong class="fn org">{.group.name}</strong>
 							</div>
 						</li>
+						{/profile.groupMemberships.values}
 						
 					</ul>
 				</dd>
